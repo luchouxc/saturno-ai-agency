@@ -53,28 +53,8 @@ a { text-decoration: none; color: inherit; }
 button { border: none; background: none; font: inherit; cursor: pointer; }
 
 /* ─── CURSOR ─────────────────────────────── */
-body { cursor: none; }
-.cur-dot {
-  position: fixed; width: 8px; height: 8px;
-  background: var(--rubi-titan); border-radius: 50%;
-  pointer-events: none; z-index: 9999;
-  transform: translate(-50%,-50%);
-  transition: transform 0.1s;
-}
-.cur-ring {
-  position: fixed; width: 32px; height: 32px;
-  border: 1.5px solid var(--nova-violeta);
-  border-radius: 50%; pointer-events: none; z-index: 9998;
-  transform: translate(-50%,-50%);
-  transition: transform 0.35s var(--ease-out-expo),
-              width 0.3s, height 0.3s, border-color 0.2s;
-  opacity: 0.7;
-}
-.cur-ring.hovering {
-  width: 52px; height: 52px;
-  border-color: var(--rubi-titan);
-  opacity: 1;
-}
+.cur-dot, .cur-ring { display: none; }
+
 
 /* ─── NOISE OVERLAY ──────────────────────── */
 body::after {
@@ -685,15 +665,13 @@ footer {
 
 /* ─── SCROLL REVEAL ──────────────────────── */
 .reveal {
-  opacity: 0;
-  transform: translateY(48px);
-  transition: opacity 0.8s var(--ease-out-expo),
-              transform 0.8s var(--ease-out-expo);
+  animation: revealUp 0.8s var(--ease-out-expo) both;
 }
-.reveal.visible { opacity: 1; transform: none; }
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-1 { animation-delay: 0.1s; }
+.reveal-delay-2 { animation-delay: 0.2s; }
+.reveal-delay-3 { animation-delay: 0.3s; }
+/* Keep .visible class harmless for JS compatibility */
+.reveal.visible { animation-play-state: running; }
 
 /* ─── SCROLL BAR ─────────────────────────── */
 ::-webkit-scrollbar { width: 4px; }
@@ -722,6 +700,10 @@ footer {
 /* ─── ANIMATIONS ─────────────────────────── */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes revealUp {
+  from { opacity: 0; transform: translateY(40px); }
   to   { opacity: 1; transform: none; }
 }
 
@@ -765,6 +747,4 @@ footer {
   .hero-stats { gap: 28px; }
   .cta-actions { flex-direction: column; }
   .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
-  body { cursor: auto; }
-  .cur-dot, .cur-ring { display: none; }
 }
