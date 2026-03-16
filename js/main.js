@@ -5,33 +5,7 @@
 (() => {
   'use strict';
 
-  /* ── Custom cursor ──────────────────────── */
-  const dot  = document.getElementById('cur-dot');
-  const ring = document.getElementById('cur-ring');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-
-  if (dot && ring) {
-    document.addEventListener('mousemove', e => {
-      mx = e.clientX; my = e.clientY;
-      dot.style.left = mx + 'px';
-      dot.style.top  = my + 'px';
-    });
-
-    const lerp = (a, b, t) => a + (b - a) * t;
-    const tick = () => {
-      rx = lerp(rx, mx, 0.12);
-      ry = lerp(ry, my, 0.12);
-      ring.style.left = rx + 'px';
-      ring.style.top  = ry + 'px';
-      requestAnimationFrame(tick);
-    };
-    tick();
-
-    document.querySelectorAll('a, button, .svc-card, .client-card').forEach(el => {
-      el.addEventListener('mouseenter', () => ring.classList.add('hovering'));
-      el.addEventListener('mouseleave', () => ring.classList.remove('hovering'));
-    });
-  }
+  /* Custom cursor removed — using default system cursor */
 
   /* ── Nav scroll state ───────────────────── */
   const nav = document.getElementById('nav');
