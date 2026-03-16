@@ -1,0 +1,8 @@
+# Cloudflare Pages — _redirects
+# Docs: https://developers.cloudflare.com/pages/configuration/redirects/
+
+# Force www → apex (or flip if you prefer www)
+https://www.saturnocreativo.com/* https://saturnocreativo.com/:splat 301
+
+# SPA fallback (not needed for static, but good practice)
+/* /index.html 200
